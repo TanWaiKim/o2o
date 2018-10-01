@@ -7,13 +7,21 @@ import java.util.Date;
  * @version 1.0.0
  */
 public class HeadLine {
+	// 头条ID
 	private Long lineId;
+	// 头条名称
 	private String lineName;
+	// 头条链接
 	private String lineLink;
+	// 头条轮播图
 	private String lineImg;
+	// 头条权重
 	private Integer priority;
+	// 头条状态（0：不可用，1：可用）
 	private Integer enableStatus;
+	// 创建时间
 	private Date createTime;
+	// 更新时间
 	private Date lastEditTime;
 
 	public Long getLineId() {

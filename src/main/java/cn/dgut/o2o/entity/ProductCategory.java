@@ -7,12 +7,19 @@ import java.util.Date;
  * @version 1.0.0
  */
 public class ProductCategory {
+	// 商品类别ID
 	private Long productCategoryId;
+	// 商铺ID
 	private Long shopId;
+	// 商品类别名称
 	private String productCategoryName;
+	// 商品类别描述
 	private String productCategoryDesc;
+	// 商品类别权重
 	private Integer priority;
+	// 创建时间
 	private Date createTime;
+	// 更新时间
 	private Date lastEditTime;
 
 	public Long getProductCategoryId() {

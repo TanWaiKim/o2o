@@ -10,20 +10,28 @@ import java.util.List;
  */
 public class Product implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -349433539553804024L;
+	// 商品ID
 	private Long productId;
+	// 商品名称
 	private String productName;
+	// 商品描述
 	private String productDesc;
-	private String imgAddr;// 简略图
+	// 商品简略图
+	private String imgAddr;
+	// 商品原价
 	private String normalPrice;
+	// 商品促销价
 	private String promotionPrice;
+	// 商品权重
 	private Integer priority;
+	// 创建时间
 	private Date createTime;
+	// 更新时间
 	private Date lastEditTime;
+	// 商品状态（-1：不可用，0：下架，1：可展示）
 	private Integer enableStatus;
+	// 
 	private Integer point;
 
 	private List<ProductImg> productImgList;

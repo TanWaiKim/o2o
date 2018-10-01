@@ -8,21 +8,35 @@ import java.util.List;
  * @version 1.0.0
  */
 public class Shop {
-
+	// 店铺ID
 	private Long shopId;
+	// 商家ID
 	private Long ownerId;
+	// 店铺类别ID
 	private Long shopCategoryId;
+	// 店铺名称
 	private String shopName;
+	// 店铺描述
 	private String shopDesc;
+	// 店铺地址
 	private String shopAddr;
+	// 联系电话
 	private String phone;
+	// 店铺门面
 	private String shopImg;
+	// 店铺经度
 	private Double longitude;
+	// 店铺维度
 	private Double latitude;
+	// 店铺权重
 	private Integer priority;
+	// 创建时间
 	private Date createTime;
+	// 更新时间
 	private Date lastEditTime;
+	// 店铺状态（-1：不可用，0：审核中，1：可用）
 	private Integer enableStatus;
+	// 店铺建议
 	private String advice;
 
 	private List<ShopAuthMap> staffList;

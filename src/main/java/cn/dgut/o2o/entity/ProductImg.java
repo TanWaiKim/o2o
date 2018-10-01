@@ -7,11 +7,17 @@ import java.util.Date;
  * @version 1.0.0
  */
 public class ProductImg {
+	// 商品图片ID
 	private Long productImgId;
+	// 商品图片地址
 	private String imgAddr;
+	// 商品图片描述
 	private String imgDesc;
+	// 商品权限
 	private Integer priority;
+	// 创建时间
 	private Date createTime;
+	// 商品ID
 	private Long productId;
 
 	public Long getProductImgId() {
