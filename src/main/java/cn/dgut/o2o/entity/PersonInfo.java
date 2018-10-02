@@ -21,12 +21,22 @@ public class PersonInfo {
 	private String email;
 	// 用户头像
 	private String profileImg;
+	// 用户身份标识（1：顾客，2：店家，3：超级管理员）
+	private Integer userType;
+	public Integer getUserType() {
+		return userType;
+	}
+
+	public void setUserType(Integer userType) {
+		this.userType = userType;
+	}
+
 	// 用户顾客身份标识
-	private Integer customerFlag;
+	// private Integer customerFlag;
 	// 用户店家身份标识
-	private Integer shopOwnerFlag;
+	// private Integer shopOwnerFlag;
 	// 用户超级管理员身份标识
-	private Integer adminFlag;
+	// private Integer adminFlag;
 	// 创建时间
 	private Date createTime;
 	// 更新时间
@@ -90,29 +100,29 @@ public class PersonInfo {
 		this.profileImg = profileImg;
 	}
 
-	public Integer getCustomerFlag() {
-		return customerFlag;
-	}
-
-	public void setCustomerFlag(Integer customerFlag) {
-		this.customerFlag = customerFlag;
-	}
-
-	public Integer getShopOwnerFlag() {
-		return shopOwnerFlag;
-	}
-
-	public void setShopOwnerFlag(Integer shopOwnerFlag) {
-		this.shopOwnerFlag = shopOwnerFlag;
-	}
-
-	public Integer getAdminFlag() {
-		return adminFlag;
-	}
-
-	public void setAdminFlag(Integer adminFlag) {
-		this.adminFlag = adminFlag;
-	}
+//	public Integer getCustomerFlag() {
+//		return customerFlag;
+//	}
+//
+//	public void setCustomerFlag(Integer customerFlag) {
+//		this.customerFlag = customerFlag;
+//	}
+//
+//	public Integer getShopOwnerFlag() {
+//		return shopOwnerFlag;
+//	}
+//
+//	public void setShopOwnerFlag(Integer shopOwnerFlag) {
+//		this.shopOwnerFlag = shopOwnerFlag;
+//	}
+//
+//	public Integer getAdminFlag() {
+//		return adminFlag;
+//	}
+//
+//	public void setAdminFlag(Integer adminFlag) {
+//		this.adminFlag = adminFlag;
+//	}
 
 	public Date getCreateTime() {
 		return createTime;

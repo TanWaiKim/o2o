@@ -41,6 +41,15 @@ public class Shop {
 
 	private List<ShopAuthMap> staffList;
 	private Area area;
+	public PersonInfo getOwner() {
+		return owner;
+	}
+
+	public void setOwner(PersonInfo owner) {
+		this.owner = owner;
+	}
+
+	private PersonInfo owner;
 	private ShopCategory shopCategory;
 	private ShopCategory parentCategory;
 

@@ -13,7 +13,7 @@ public class LocalAuth {
 	private String userName;
 	// 密码
 	private String password;
-	// 用户ID
+	// 关联用户ID
 	private Long userId;
 	// 创建时间
 	private Date createTime;

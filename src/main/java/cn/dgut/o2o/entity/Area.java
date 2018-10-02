@@ -8,11 +8,11 @@ import java.util.Date;
  */
 public class Area {
 	// 区域Id
-	private Long areaId;
+	private Integer areaId;
 	// 区域名称
 	private String areaName;
 	// 区域描述
-	private String areaDesc;
+	// private String areaDesc;
 	// 区域权重（排序时使用）
 	private Integer priority;
 	// 创建时间
@@ -20,11 +20,11 @@ public class Area {
 	// 更新时间
 	private Date lastEditTime;
 
-	public Long getAreaId() {
+	public Integer getAreaId() {
 		return areaId;
 	}
 
-	public void setAreaId(Long areaId) {
+	public void setAreaId(Integer areaId) {
 		this.areaId = areaId;
 	}
 
@@ -36,13 +36,13 @@ public class Area {
 		this.areaName = areaName;
 	}
 
-	public String getAreaDesc() {
-		return areaDesc;
-	}
-
-	public void setAreaDesc(String areaDesc) {
-		this.areaDesc = areaDesc;
-	}
+//	public String getAreaDesc() {
+//		return areaDesc;
+//	}
+//
+//	public void setAreaDesc(String areaDesc) {
+//		this.areaDesc = areaDesc;
+//	}
 
 	public Integer getPriority() {
 		return priority;

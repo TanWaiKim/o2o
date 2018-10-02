@@ -21,8 +21,17 @@ public class ShopCategory {
 	private Date createTime;
 	// 更新时间
 	private Date lastEditTime;
+	public ShopCategory getParent() {
+		return parent;
+	}
+
+	public void setParent(ShopCategory parent) {
+		this.parent = parent;
+	}
+
 	// 上级店铺类别
 	private Long parentId;
+	private ShopCategory parent;
 
 	public Long getShopCategoryId() {
 		return shopCategoryId;
