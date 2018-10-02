@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class Area {
 	// 区域Id
-	private Integer areaId;
+	private Long areaId;
 	// 区域名称
 	private String areaName;
 	// 区域描述
@@ -20,11 +20,11 @@ public class Area {
 	// 更新时间
 	private Date lastEditTime;
 
-	public Integer getAreaId() {
+	public Long getAreaId() {
 		return areaId;
 	}
 
-	public void setAreaId(Integer areaId) {
+	public void setAreaId(Long areaId) {
 		this.areaId = areaId;
 	}
 

@@ -12,7 +12,7 @@ public class PersonInfo {
 	// 用户姓名
 	private String name;
 	// 用户生日
-	private Date birthday;
+	// private Date birthday;
 	// 用户性别
 	private String gender;
 	// 用户手机号码
@@ -60,13 +60,13 @@ public class PersonInfo {
 		this.name = name;
 	}
 
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
+//	public Date getBirthday() {
+//		return birthday;
+//	}
+//
+//	public void setBirthday(Date birthday) {
+//		this.birthday = birthday;
+//	}
 
 	public String getGender() {
 		return gender;
