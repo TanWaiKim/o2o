@@ -29,7 +29,7 @@
 				phone = #{phone},
 			</if>
 			<if test="shopImg != null">
-				shopImg = #{shopImg},
+				shop_img = #{shopImg},
 			</if>
 			<if test="priority != null">
 				priority = #{priority},
@@ -47,7 +47,7 @@
 				area_id = #{area.areaId},
 			</if>
 			<if test="shopCategory != null">
-				shop_category = #{shopCategory.shopCategoryId}
+				shop_category_id = #{shopCategory.shopCategoryId}
 			</if>
 		</set>
 		WHERE shop_id = #{shopId}

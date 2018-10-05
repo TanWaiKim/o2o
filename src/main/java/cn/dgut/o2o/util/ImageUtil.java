@@ -2,14 +2,14 @@ package cn.dgut.o2o.util;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
 
-import javax.imageio.ImageIO;
 
 import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.geometry.Positions;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 /**
@@ -19,39 +19,73 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
  * @version 1.0.0
  */
 public class ImageUtil {
-	/**
-	 * 处理缩略图（门面图、商品小图）
-	 * @param thumbnail 用户传送的文件流
-	 * @param targetAddr 文件保存的路径
-	 * @return
-	 */
-	public static String generateThumbnail(CommonsMultipartFile thumbnail, String targetAddr) {
-		// 自定义文件名称
-		String realFileName = FileUtil.getRandomFileName();
-		// 文件的扩展名
-		String extension = FileUtil.getFileExtension(thumbnail);
-		// 创建存放文件的目录
-		FileUtil.makeDirPath(targetAddr);
-		// 相对路径 = 目标路径（存放目录）+文件名+扩展名
-		String relativeAddr = targetAddr + realFileName + extension;
-		// 根据相对路径来创建新的文件（用来保存上传的文件）——目的位置
-		File dest = new File(FileUtil.getImgBasePath() + relativeAddr);
-		// 创建缩略图，并将其存放到目的位置
-		try {
-			Thumbnails.of(thumbnail.getInputStream()).size(200, 200).outputQuality(0.25f).toFile(dest);
-		} catch (IOException e) {
-			throw new RuntimeException("创建缩略图失败：" + e.toString());
-		}
-		return relativeAddr;
-	}
-	
-	public static void main(String[] args) throws IOException {
-		// 得到当前的classpath的绝对路径的URI
-		String basePath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
-		// 用水印图片对源图片加水印并进行压缩处理
-		Thumbnails.of(new File("C:/Users/Administrator/Desktop/main.jpg")).size(200, 200)
-				.watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/test.jpg")), 0.25f)
-				.outputQuality(0.8f).toFile("C:/Users/Administrator/Desktop/new_main.jpg");
-		
-	}
+    // 日期时间格式
+    private static final SimpleDateFormat sDateFormate = new SimpleDateFormat("yyyyMMddHHmmss");
+    // 生成随机数类
+    private static final Random random = new Random();
+    
+    /**
+     * 创建缩略图
+     * @param thumbnail 图片文件流
+     * @param targetAddr 目标地址：upload/item/shop/1/
+     * @return
+     */
+    public static String generateThumbnail(CommonsMultipartFile thumbnail, String targetAddr) {
+        // 获取图片的随机图片名
+        String realFileName = getRandomFileName();
+        // 获取图片的拓展名
+        String extension = getFileExtension(thumbnail);
+        // 根据目标地址创建保存图片的目录：upload/item/shop/1/2012548759655482564.jpg
+        makeDirPath(targetAddr);
+        // 形如：upload/item/shop/1/2012548759655482564.jpg
+        String relativeAddr = targetAddr + realFileName + extension;
+        // 目的图片文件：F:/image + upload/item/shop/1/2012548759655482564.jpg
+        File dest = new File(PathUtil.getImgBasePath() + relativeAddr);
+        try {
+        	// 先将CommonsMultipartFile转为File
+        	File file = new File(PathUtil.getImgTempPath()+relativeAddr);
+        	FileUtils.copyInputStreamToFile(thumbnail.getInputStream(), file);
+        	// 创建缩略图
+            Thumbnails.of(file).size(200, 200).outputQuality(0.25f).toFile(dest);
+        } catch (IOException e) {
+            throw new RuntimeException("创建缩略图失败：" + e.toString());
+        }
+        return relativeAddr;
+    }
+
+    /**
+     * 创建路径  /home/work/TanWaiKim/xx.jpg
+     * 那么 home work TanWaiKim 这三个文件都自动创建
+     * @param targetAddr
+     */
+    private static void makeDirPath(String targetAddr) {
+        String realFileParentPath = PathUtil.getImgBasePath() + targetAddr;
+        File dirPath = new File(realFileParentPath);
+        // 如果路径不存在就递归的创建
+        if (!dirPath.exists()) {
+            dirPath.mkdirs();
+        }
+    }
+
+    /**
+     * 获取输入文件流的拓展名
+     * @param thumbnail
+     * @return
+     */
+    private static String getFileExtension(CommonsMultipartFile cFile) {
+        // 获取原来的文件名
+        String originalFileName = cFile.getOriginalFilename();
+        return originalFileName.substring(originalFileName.lastIndexOf("."));
+    }
+
+    /**
+     * 生成随机文件名，当前年月日时分秒 + 5位随机数
+     * @return
+     */
+    private static String getRandomFileName() {
+        // 获取随机的5位数
+        int rannum = random.nextInt(89999) + 10000;
+        String nowTimestr = sDateFormate.format(new Date());
+        return nowTimestr + rannum;
+    }
 }

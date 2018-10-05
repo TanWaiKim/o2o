@@ -41,31 +41,31 @@ public class FileUtil {
 	}
 
 	public static String getHeadLineImagePath() {
-		String headLineImagePath = "/upload/images/item/headtitle/";
+		String headLineImagePath = "upload/images/item/headtitle/";
 		headLineImagePath = headLineImagePath.replace("/", seperator);
 		return headLineImagePath;
 	}
 
 	public static String getShopCategoryImagePath() {
-		String shopCategoryImagePath = "/upload/images/item/shopcategory/";
+		String shopCategoryImagePath = "upload/images/item/shopcategory/";
 		shopCategoryImagePath = shopCategoryImagePath.replace("/", seperator);
 		return shopCategoryImagePath;
 	}
 
 	public static String getPersonInfoImagePath() {
-		String personInfoImagePath = "/upload/images/item/personinfo/";
+		String personInfoImagePath = "upload/images/item/personinfo/";
 		personInfoImagePath = personInfoImagePath.replace("/", seperator);
 		return personInfoImagePath;
 	}
 
 	/**
-	 * 获得系统存放图片的相对（子）路径
+	 * 获得系统需要存放图片的相对（子）路径
 	 * @param shopId
 	 * @return
 	 */
 	public static String getShopImagePath(long shopId) {
 		StringBuilder shopImagePathBuilder = new StringBuilder();
-		shopImagePathBuilder.append("/upload/images/item/shop/");
+		shopImagePathBuilder.append("upload/images/item/shop/");
 		shopImagePathBuilder.append(shopId);
 		shopImagePathBuilder.append("/");
 		String shopImagePath = shopImagePathBuilder.toString().replace("/", seperator);
@@ -90,6 +90,7 @@ public class FileUtil {
 	 * @return
 	 */
 	public static String getFileExtension(CommonsMultipartFile cFile) {
+		// 获取文件名，如：mian.jpg
 		String originalFileName = cFile.getOriginalFilename();
 		return originalFileName.substring(originalFileName.lastIndexOf("."));
 	}

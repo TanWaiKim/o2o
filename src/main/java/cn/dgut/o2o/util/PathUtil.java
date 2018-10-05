@@ -10,7 +10,7 @@ public class PathUtil {
 	private static String seperator = System.getProperty("file.separator");
 	
 	/**
-	 * 获得系统存放图片的根路径
+	 * 获得系统存放图片的根路径，形如：F:/image/
 	 * @return
 	 */
 	public static String getImgBasePath(){
@@ -19,7 +19,7 @@ public class PathUtil {
 		String basePath = "";
 		// 根据不同的操作系统选择不同的根路径
 		if (os.toLowerCase().startsWith("win")){
-			basePath = "F:/image";
+			basePath = "F:/image/";
 		} else {
 			basePath = "/home/TanWaiKim/image/";
 		}
@@ -28,12 +28,30 @@ public class PathUtil {
 	}
 	
 	/**
-	 * 获得系统存放图片的相对（子）路径
+	 * 获得系统临时存放图片的根路径，形如：F:/image/temp/
+	 * @return
+	 */
+	public static String getImgTempPath(){
+		// 获得操作系统的名称
+		String os = System.getProperty("os.name");
+		String basePath = "";
+		// 根据不同的操作系统选择不同的根路径
+		if (os.toLowerCase().startsWith("win")){
+			basePath = "F:/image/temp/";
+		} else {
+			basePath = "/home/TanWaiKim/image/";
+		}
+		basePath = basePath.replace("/", seperator);
+		return basePath;
+	}
+	
+	/**
+	 * 获得系统存放图片的相对（子）路径，形如：upload/item/shop/1/
 	 * @param shopId
 	 * @return
 	 */
 	public static String getShopImagePath(long shopId){
-		String imagePath = "/upload/item/shop/" + shopId + "/";
+		String imagePath = "upload/item/shop/" + shopId + "/";
 		return imagePath.replace("/", seperator);
 	}
 }
