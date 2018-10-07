@@ -35,18 +35,19 @@ public class ImageUtil {
         String realFileName = getRandomFileName();
         // 获取图片的拓展名
         String extension = getFileExtension(thumbnail);
-        // 根据目标地址创建保存图片的目录：upload/item/shop/1/2012548759655482564.jpg
+        // 根据目标地址创建保存图片的目录：upload/item/shop/1/
         makeDirPath(targetAddr);
-        // 形如：upload/item/shop/1/2012548759655482564.jpg
+        // 形如：upload/item/shop/1/+2012548759655482564+.jpg
         String relativeAddr = targetAddr + realFileName + extension;
         // 目的图片文件：F:/image + upload/item/shop/1/2012548759655482564.jpg
         File dest = new File(PathUtil.getImgBasePath() + relativeAddr);
         try {
         	// 先将CommonsMultipartFile转为File
-        	File file = new File(PathUtil.getImgTempPath()+relativeAddr);
-        	FileUtils.copyInputStreamToFile(thumbnail.getInputStream(), file);
+        	// File file = new File(PathUtil.getImgTempPath()+relativeAddr);
+        	// FileUtils.copyInputStreamToFile(thumbnail.getInputStream(), file);
         	// 创建缩略图
-            Thumbnails.of(file).size(200, 200).outputQuality(0.25f).toFile(dest);
+            // Thumbnails.of(file).size(200, 200).outputQuality(0.25f).toFile(dest);
+        	Thumbnails.of(thumbnail.getInputStream()).size(200, 200).outputQuality(0.8f).toFile(dest);
         } catch (IOException e) {
             throw new RuntimeException("创建缩略图失败：" + e.toString());
         }
@@ -54,11 +55,12 @@ public class ImageUtil {
     }
 
     /**
-     * 创建路径  /home/work/TanWaiKim/xx.jpg
-     * 那么 home work TanWaiKim 这三个文件都自动创建
+     * 创建路径  upload/item/shop/1/
+     * 那么 upload、item、shop这三个文件都自动创建，自动拼接F：/image
      * @param targetAddr
      */
     private static void makeDirPath(String targetAddr) {
+    	// 绝对路径=根路径+相对路径
         String realFileParentPath = PathUtil.getImgBasePath() + targetAddr;
         File dirPath = new File(realFileParentPath);
         // 如果路径不存在就递归的创建

@@ -6,7 +6,7 @@ import cn.dgut.o2o.entity.Shop;
 import cn.dgut.o2o.enums.ShopStateEnum;
 
 /**
- * shop响应类
+ * shop返回类型
  * @author tanweijian
  * @date 2018年10月3日 上午1:59:25
  * @version 1.0.0
