@@ -43,9 +43,9 @@ public class ShopServiceTest extends BaseTest {
 		shop.setOwner(owner);
 		shop.setArea(area);
 		shop.setShopCategory(shopCategory);
-		shop.setShopName("测试店铺1");
-		shop.setShopDesc("测试描述1");
-		shop.setShopAddr("东莞理工学院1");
+		shop.setShopName("测试店铺2");
+		shop.setShopDesc("测试描述2");
+		shop.setShopAddr("东莞理工学院2");
 		shop.setPhone("13631789635");
 		shop.setAdvice("审核中");
 		shop.setEnableStatus(ShopStateEnum.CHECK.getState());

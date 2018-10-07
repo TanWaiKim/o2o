@@ -42,32 +42,28 @@ public class ShopServiceImpl implements ShopService{
             shop.setLastEditTime(new Date());
             // 添加店铺信息
             int effectedNum = shopDao.insertShop(shop);
-
             // 判断是否插入成功
             if (effectedNum <= 0) {
+            	// 抛出的异常必须继续RuntimeException，否则事务不会回滚
                 throw new ShopOperationException("店铺创建失败");
             } else {
                 if (shopImg != null) {
-                    // 存储图片
                     try {
+                    	// 存储图片
                         addShopImg(shop, shopImg);
                     } catch (Exception e) {
                         throw new ShopOperationException("addShopImg error" + e.getMessage());
                     }
-                    // 更新图片信息
+                    // 更新店铺的图片地址到店铺信息中
                     effectedNum = shopDao.updateShop(shop);
                     if (effectedNum <= 0) {
                         throw new ShopOperationException("更新图片地址失败");
                     }
-
                 }
             }
-
         } catch (Exception e) {
             throw new ShopOperationException("addShop error" + e.getMessage());
         }
-
-
         return new ShopExecution(ShopStateEnum.CHECK, shop);
     }
 
@@ -79,8 +75,9 @@ public class ShopServiceImpl implements ShopService{
     private void addShopImg(Shop shop, CommonsMultipartFile  shopImg) {
         // 获取shop图片目录的相对值路径，如：upload/item/shop/1/
         String dest = PathUtil.getShopImagePath(shop.getShopId());
-        // 生成缩略图
+        // 生成缩略图，返回店铺图片的相对地址
         String shopImgAddr = ImageUtil.generateThumbnail(shopImg, dest);
+        // 设置店铺图片的地址到店铺信息中
         shop.setShopImg(shopImgAddr);
     }
 }
