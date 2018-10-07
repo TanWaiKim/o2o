@@ -3,16 +3,13 @@ package cn.dgut.o2o.service;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import cn.dgut.o2o.BaseTest;
 import cn.dgut.o2o.dto.ShopExecution;
@@ -43,8 +40,8 @@ public class ShopServiceTest extends BaseTest {
 		shop.setOwner(owner);
 		shop.setArea(area);
 		shop.setShopCategory(shopCategory);
-		shop.setShopName("测试店铺2");
-		shop.setShopDesc("测试描述2");
+		shop.setShopName("测试店铺3");
+		shop.setShopDesc("测试描述3");
 		shop.setShopAddr("东莞理工学院2");
 		shop.setPhone("13631789635");
 		shop.setAdvice("审核中");
@@ -53,13 +50,8 @@ public class ShopServiceTest extends BaseTest {
 		shop.setLastEditTime(new Date());
 		// 需要上传的文件
 		File shopImg = new File("C:/Users/Administrator/Desktop/main.jpg");
-		// File转FileItem
-		DiskFileItem fileItem = new DiskFileItem("shopImg", "text/plain", false, shopImg.getName(), (int) shopImg.length(), shopImg.getParentFile());
-		fileItem.getOutputStream();
-		// File转MultipartFile
-		MultipartFile multipartFile = new CommonsMultipartFile(fileItem);
-		
-		ShopExecution se = shopService.addShop(shop, (CommonsMultipartFile) multipartFile);
+		InputStream inputStream = new FileInputStream(shopImg);
+		ShopExecution se = shopService.addShop(shop, inputStream, shopImg.getName());
 		assertEquals(ShopStateEnum.CHECK.getState(),se.getState());
 	}
 }

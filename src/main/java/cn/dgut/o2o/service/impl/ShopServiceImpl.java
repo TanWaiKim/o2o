@@ -1,11 +1,11 @@
 package cn.dgut.o2o.service.impl;
 
+import java.io.InputStream;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import cn.dgut.o2o.dao.ShopDao;
 import cn.dgut.o2o.dto.ShopExecution;
@@ -29,7 +29,7 @@ public class ShopServiceImpl implements ShopService{
     @Override
     // 事务的支持
     @Transactional
-    public ShopExecution addShop(Shop shop, CommonsMultipartFile shopImg) {
+    public ShopExecution addShop(Shop shop, InputStream shopImgInputStream, String fileName) {
         // 空值判断
         if (shop == null) {
             return new ShopExecution(ShopStateEnum.NULL_SHOP_INFO);
@@ -47,10 +47,10 @@ public class ShopServiceImpl implements ShopService{
             	// 抛出的异常必须继续RuntimeException，否则事务不会回滚
                 throw new ShopOperationException("店铺创建失败");
             } else {
-                if (shopImg != null) {
+                if (shopImgInputStream != null) {
                     try {
                     	// 存储图片
-                        addShopImg(shop, shopImg);
+                        addShopImg(shop, shopImgInputStream, fileName);
                     } catch (Exception e) {
                         throw new ShopOperationException("addShopImg error" + e.getMessage());
                     }
@@ -72,11 +72,11 @@ public class ShopServiceImpl implements ShopService{
      * @param shop 店铺信息
      * @param shopImg 图片文件流
      */
-    private void addShopImg(Shop shop, CommonsMultipartFile  shopImg) {
+    private void addShopImg(Shop shop, InputStream shopImgInputStream, String fileName) {
         // 获取shop图片目录的相对值路径，如：upload/item/shop/1/
         String dest = PathUtil.getShopImagePath(shop.getShopId());
         // 生成缩略图，返回店铺图片的相对地址
-        String shopImgAddr = ImageUtil.generateThumbnail(shopImg, dest);
+        String shopImgAddr = ImageUtil.generateThumbnail(shopImgInputStream, fileName, dest);
         // 设置店铺图片的地址到店铺信息中
         shop.setShopImg(shopImgAddr);
     }

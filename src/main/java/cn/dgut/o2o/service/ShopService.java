@@ -1,6 +1,6 @@
 package cn.dgut.o2o.service;
 
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import java.io.InputStream;
 
 import cn.dgut.o2o.dto.ShopExecution;
 import cn.dgut.o2o.entity.Shop;
@@ -17,5 +17,5 @@ public interface ShopService {
 	 * @param shopImg 店铺图片
 	 * @return
 	 */
-	ShopExecution addShop(Shop shop, CommonsMultipartFile shopImg);
+	ShopExecution addShop(Shop shop, InputStream shopImgInputStream, String fileName);
 }
